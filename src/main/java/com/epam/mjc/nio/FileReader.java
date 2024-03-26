@@ -3,9 +3,12 @@ package com.epam.mjc.nio;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class FileReader {
+    Logger logger = Logger.getLogger(FileReader.class.getSimpleName());
 
     public Profile getDataFromFile(File file) {
         try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(file))) {
@@ -16,7 +19,7 @@ public class FileReader {
             }
             return parseToObject(text.toString());
         } catch (IOException e) {
-            System.out.println("File not found or input error ");
+            logger.log(Level.WARNING, "File not found or not exist");
         }
         return null;
     }
